@@ -1,25 +1,17 @@
+import ScrollOrchestrator from "@/components/motion/ScrollOrchestrator";
 import Approach from "@/components/stages/Approach";
+import Engage from "@/components/stages/Engage";
+import Inhabit from "@/components/stages/Inhabit";
+import Verify from "@/components/stages/Verify";
 
 export default function HomePage() {
   return (
     <main>
+      <ScrollOrchestrator />
       <Approach />
-
-      <section className="flex h-stage items-center justify-center bg-ink-900">
-        <p className="max-w-xl text-balance text-center text-ink-100/80">
-          Immersive Intelligence for luxury real estate.
-        </p>
-      </section>
-
-      <section className="flex h-stage items-center justify-center">
-        <p className="text-sm uppercase tracking-[0.3em] text-ink-100/50">
-          Scroll to continue
-        </p>
-      </section>
-
-      <section className="flex h-stage items-center justify-center bg-ink-900">
-        <p className="text-sm uppercase tracking-[0.3em] text-ink-100/50">End of placeholder</p>
-      </section>
+      <Inhabit />
+      <Verify />
+      <Engage />
     </main>
   );
 }

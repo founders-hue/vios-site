@@ -26,7 +26,10 @@ export default function Approach() {
   }, []);
 
   return (
-    <section className="relative h-stage w-full overflow-hidden bg-ink-950">
+    <section
+      data-stage="approach"
+      className="relative h-stage w-full overflow-hidden bg-ink-950"
+    >
       {verdict === null || !verdict.ok ? <Poster /> : <ApproachScene />}
     </section>
   );
