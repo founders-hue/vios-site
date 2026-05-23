@@ -1,5 +1,6 @@
 "use client";
 
+import { View } from "@react-three/drei";
 import { useActiveStage } from "@/components/motion/ActiveStageContext";
 import ApproachContent from "@/components/three/scenes/ApproachContent";
 import InhabitContent from "@/components/three/scenes/InhabitContent";
@@ -17,6 +18,7 @@ export default function SceneRoot() {
       <group visible={inhabitActive}>
         <InhabitContent active={inhabitActive} />
       </group>
+      <View.Port />
     </>
   );
 }
