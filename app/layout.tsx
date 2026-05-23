@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { ActiveStageProvider } from "@/components/motion/ActiveStageContext";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import TheatreStudioLoader from "@/components/dev/TheatreStudioLoader";
 import LazyStageRenderer from "@/components/three/LazyStageRenderer";
@@ -33,10 +34,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-AU">
       <body>
         <SmoothScroll>
-          <WebGLProvider>
-            <LazyStageRenderer />
-            <div className="relative z-10">{children}</div>
-          </WebGLProvider>
+          <ActiveStageProvider>
+            <WebGLProvider>
+              <LazyStageRenderer />
+              <div className="relative z-10">{children}</div>
+            </WebGLProvider>
+          </ActiveStageProvider>
         </SmoothScroll>
         <TheatreStudioLoader />
       </body>

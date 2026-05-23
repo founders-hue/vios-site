@@ -2,10 +2,14 @@
 
 import InhabitCamera from "@/components/three/InhabitCamera";
 
-export default function InhabitContent() {
+type Props = {
+  active?: boolean;
+};
+
+export default function InhabitContent({ active = false }: Props) {
   return (
     <group position={[0, 0, -30]}>
-      <InhabitCamera />
+      <InhabitCamera makeDefault={active} />
       <ambientLight intensity={0.3} />
       <directionalLight position={[5, 10, 5]} intensity={0.7} />
 

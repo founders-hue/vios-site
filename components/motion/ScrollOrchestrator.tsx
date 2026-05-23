@@ -3,11 +3,15 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLayoutEffect } from "react";
+import { useActiveStage } from "@/components/motion/ActiveStageContext";
+import { inhabitSheet } from "@/lib/theatre/project";
 import { STAGE_TIMING, type StageId } from "@/lib/timing";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ScrollOrchestrator() {
+  const { setActive } = useActiveStage();
+
   useLayoutEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) return;
@@ -17,7 +21,6 @@ export default function ScrollOrchestrator() {
     const ctx = gsap.context(() => {
       (Object.keys(STAGE_TIMING) as StageId[]).forEach((id) => {
         const { pinned, pinVh } = STAGE_TIMING[id];
-        if (!pinned) return;
 
         const trigger = document.querySelector(`[data-stage="${id}"]`);
         if (!trigger) return;
@@ -25,17 +28,25 @@ export default function ScrollOrchestrator() {
         ScrollTrigger.create({
           trigger,
           start: "top top",
-          end: `+=${pinVh}%`,
-          pin: true,
-          pinSpacing: true,
-          anticipatePin: 1,
+          end: pinned ? `+=${pinVh}%` : "bottom top",
+          pin: pinned,
+          pinSpacing: pinned,
+          anticipatePin: pinned ? 1 : 0,
           markers: showMarkers,
+          onEnter: () => setActive(id),
+          onEnterBack: () => setActive(id),
+          onUpdate:
+            id === "inhabit"
+              ? (self) => {
+                  inhabitSheet.sequence.position = self.progress;
+                }
+              : undefined,
         });
       });
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [setActive]);
 
   return null;
 }
