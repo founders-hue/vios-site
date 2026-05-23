@@ -4,7 +4,7 @@ export default function Inhabit() {
   return (
     <section
       data-stage="inhabit"
-      className="relative flex h-stage w-full items-center justify-center bg-ink-900 px-6"
+      className="relative flex h-stage w-full items-center justify-center px-6"
     >
       <div className="max-w-3xl text-center">
         <p className="mb-4 text-sm uppercase tracking-[0.3em] text-ink-100/40">
