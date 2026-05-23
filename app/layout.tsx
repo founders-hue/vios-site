@@ -4,6 +4,8 @@ import SmoothScroll from "@/components/motion/SmoothScroll";
 import TheatreStudioLoader from "@/components/dev/TheatreStudioLoader";
 import LazyStageRenderer from "@/components/three/LazyStageRenderer";
 import { WebGLProvider } from "@/components/three/WebGLContext";
+import { DrawerProvider } from "@/components/ui/DrawerContext";
+import LeadDrawer from "@/components/ui/LeadDrawer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,12 +36,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-AU">
       <body>
         <SmoothScroll>
-          <ActiveStageProvider>
-            <WebGLProvider>
-              <LazyStageRenderer />
-              <div className="relative z-10">{children}</div>
-            </WebGLProvider>
-          </ActiveStageProvider>
+          <DrawerProvider>
+            <ActiveStageProvider>
+              <WebGLProvider>
+                <LazyStageRenderer />
+                <div className="relative z-10">{children}</div>
+              </WebGLProvider>
+            </ActiveStageProvider>
+            <LeadDrawer />
+          </DrawerProvider>
         </SmoothScroll>
         <TheatreStudioLoader />
       </body>
