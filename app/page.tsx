@@ -1,11 +1,9 @@
+import Approach from "@/components/stages/Approach";
+
 export default function HomePage() {
   return (
     <main>
-      <section className="flex h-stage items-center justify-center">
-        <h1 className="font-serif text-5xl tracking-tight text-ink-50 sm:text-7xl">
-          VIOS Group
-        </h1>
-      </section>
+      <Approach />
 
       <section className="flex h-stage items-center justify-center bg-ink-900">
         <p className="max-w-xl text-balance text-center text-ink-100/80">

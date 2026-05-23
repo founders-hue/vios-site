@@ -22,6 +22,13 @@ VIOS Group is an Australian PropTech company building Immersive Intelligence for
 
 Do not introduce a dependency outside this list without asking. See section 18.
 
+**Versions:** package.json is the source of truth for pinned versions. Two pins differ from the original Day 0 plan because the planned versions did not work as-is:
+
+- `next` and `eslint-config-next` pinned to `15.5.18` (the highest real 15.x backport on npm; the planned `15.6.0` does not exist).
+- `tailwindcss` and `@tailwindcss/postcss` pinned to `4.3.0` (the planned `4.0.6` ships with a scanner serde bug, `Missing field 'negated' on ScannerOptions.sources`, that breaks the dev build).
+
+Stay inside the 15.x and 4.x lines respectively when bumping further.
+
 ## 3. Voice and copy rules
 
 - Australian English throughout.
