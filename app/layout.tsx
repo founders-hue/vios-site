@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import SmoothScroll from "@/components/motion/SmoothScroll";
+import LazyStageRenderer from "@/components/three/LazyStageRenderer";
+import { WebGLProvider } from "@/components/three/WebGLContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -29,7 +31,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-AU">
       <body>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <WebGLProvider>
+            <LazyStageRenderer />
+            <div className="relative z-10">{children}</div>
+          </WebGLProvider>
+        </SmoothScroll>
       </body>
     </html>
   );

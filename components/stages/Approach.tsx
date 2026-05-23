@@ -1,13 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
-import { probeWebGL, type WebGLVerdict } from "@/lib/webgl-probe";
-
-const ApproachScene = dynamic(() => import("@/components/three/ApproachScene"), {
-  ssr: false,
-  loading: () => <Poster />,
-});
+import { useWebGL } from "@/components/three/WebGLContext";
 
 function Poster() {
   return (
@@ -19,18 +12,15 @@ function Poster() {
 }
 
 export default function Approach() {
-  const [verdict, setVerdict] = useState<WebGLVerdict | null>(null);
-
-  useEffect(() => {
-    setVerdict(probeWebGL());
-  }, []);
+  const verdict = useWebGL();
+  const showPoster = verdict === null || !verdict.ok;
 
   return (
     <section
       data-stage="approach"
-      className="relative h-stage w-full overflow-hidden bg-ink-950"
+      className="relative h-stage w-full overflow-hidden"
     >
-      {verdict === null || !verdict.ok ? <Poster /> : <ApproachScene />}
+      {showPoster && <Poster />}
     </section>
   );
 }
