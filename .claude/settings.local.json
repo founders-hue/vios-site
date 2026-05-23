@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm --version)",
+      "Bash(git --version)",
+      "Bash(gh --version)",
+      "Bash(corepack --version)",
+      "Bash(corepack enable *)",
+      "Bash(corepack prepare *)",
+      "Bash(brew --version)",
+      "Bash(pnpm install *)",
+      "Bash(npm view *)",
+      "Bash(pnpm tsc *)",
+      "Bash(pnpm dev *)",
+      "Bash(curl -s -o /tmp/vios-home.html -w \"HTTP %{http_code} | %{size_download}B | %{time_total}s\\\\n\" http://localhost:3000/)",
+      "Read(//tmp/**)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(git init *)",
+      "Bash(git config *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
