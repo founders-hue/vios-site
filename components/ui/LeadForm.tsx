@@ -40,9 +40,32 @@ export default function LeadForm() {
     }
 
     setStatus("submitting");
-    // Block 2 wires the real /api/lead call. For now, stub success.
-    await new Promise((resolve) => setTimeout(resolve, 400));
-    setStatus("success");
+    try {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        return;
+      }
+
+      const data = (await response.json().catch(() => null)) as
+        | { fieldErrors?: LeadFieldErrors; error?: string }
+        | null;
+
+      if (data?.fieldErrors) {
+        setErrors(data.fieldErrors);
+        setStatus("idle");
+        return;
+      }
+
+      setStatus("error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   if (status === "success") {
